@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Communication – UNISERV BTP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark:  #EEF3FA;
+    --blue-mid:   #C8D8F0;
+    --blue-card:  #1E4080;
+    --blue-acc:   #2E6DB4;
+    --blue-light: #1A5CA8;
+    --white:      #1A2A3A;
+    --grey-light: #2C3E55;
+    --grey-mid:   #4A6080;
+    --grey-dark:  #8FA4C0;
+    --surface:    #FFFFFF;
+    --border:     rgba(46,109,180,0.18);
+
+    --ok:    #1E8A4C;
+    --ok-bg: rgba(30,138,76,0.10);
+    --warn:    #C0392B;
+    --warn-bg: rgba(192,57,43,0.10);
+    --enc:    #2E6DB4;
+    --enc-bg: rgba(46,109,180,0.12);
+    --inc:    #7A94B0;
+    --inc-bg: rgba(122,148,176,0.12);
+
+    --radius: 10px;
+    --shadow: 0 4px 18px rgba(46,109,180,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #E8F0FA;
+    color: var(--white);
+    min-height: 100vh;
+    padding: 36px 16px 64px;
+  }
+
+  /* HEADER */
+  header { max-width: 960px; margin: 0 auto 40px; text-align: center; }
+  .hbadge {
+    display: inline-block; background: var(--blue-card);
+    color: var(--blue-light); font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 5px 18px; border-radius: 20px; margin-bottom: 18px;
+    border: 1px solid var(--blue-acc);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4.5vw, 38px);
+    color: #1A2A3A; line-height: 1.2; margin-bottom: 10px;
+  }
+  header h1 span { color: var(--blue-acc); }
+  header p { color: #4A6080; font-size: 13px; }
+  .hdiv {
+    width: 56px; height: 3px;
+    background: linear-gradient(90deg, var(--blue-acc), transparent);
+    margin: 16px auto 0; border-radius: 2px;
+  }
+
+  /* LEGEND */
+  .legend-box {
+    max-width: 960px; margin: 0 auto 28px;
+    background: #FFFFFF; border: 1px solid rgba(46,109,180,0.18);
+    border-radius: var(--radius); padding: 16px 22px;
+  }
+  .legend-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: #4A6080; margin-bottom: 12px;
+  }
+  .legend-grid { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #2C3E55; }
+  .leg { width: 30px; height: 26px; border-radius: 5px; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+  .leg-ok   { border-color: var(--ok);   color: var(--ok);   background: var(--ok-bg); }
+  .leg-warn { border-color: var(--warn); color: var(--warn); background: var(--warn-bg); }
+  .leg-enc  { border-color: var(--enc);  color: var(--enc);  background: var(--enc-bg); font-size:8px; letter-spacing:-0.5px; }
+  .leg-inc  { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--inc); background: var(--inc-bg); }
+
+  /* PROGRESS */
+  .prog-wrap { max-width: 960px; margin: 0 auto 28px; }
+  .prog-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--grey-mid); margin-bottom: 6px; }
+  .prog-count { font-weight: 600; color: var(--blue-light); }
+  .prog-bar { background: rgba(255,255,255,0.06); border-radius: 20px; height: 7px; overflow: hidden; }
+  .prog-fill { height: 100%; background: linear-gradient(90deg, var(--blue-acc), var(--blue-light)); border-radius: 20px; transition: width 0.4s ease; }
+
+  /* WRAPPER */
+  .wrapper { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+
+  /* PHASE */
+  .phase { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); }
+  .ph-head {
+    background: linear-gradient(135deg, var(--blue-card), #2E5FA0);
+    padding: 16px 26px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 2px solid var(--blue-acc);
+  }
+  .ph-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--blue-acc); color: var(--white);
+    font-weight: 700; font-size: 15px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ph-title { font-family: 'Playfair Display', serif; font-size: 16px; color: #FFFFFF; font-weight: 600; }
+  .ph-sub { font-size: 11px; color: #B8CCE8; font-style: italic; margin-top: 2px; }
+  .ph-body { padding: 22px 26px; display: flex; flex-direction: column; gap: 18px; }
+
+  /* SECTION LABEL */
+  .sec-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--blue-light);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(74,144,217,0.2); }
+
+  /* STATUS BUTTON GROUP */
+  .cbg { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; align-items: center; }
+  .cb {
+    border-radius: 5px; border: 2px solid;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; transition: all 0.18s;
+    flex-shrink: 0; cursor: pointer; user-select: none;
+    width: 30px; height: 26px; font-size: 10px;
+  }
+  .cb-ok   { border-color: var(--ok);   color: var(--ok);   background: rgba(30,138,76,0.06); font-weight:800; }
+  .cb-warn { border-color: var(--warn); color: var(--warn); background: rgba(192,57,43,0.06); font-weight:800; }
+  .cb-enc  { border-color: var(--enc);  color: var(--enc);  background: rgba(46,109,180,0.08); font-size:8px; letter-spacing:-0.5px; font-weight:800; }
+  .cb-ok.act   { background: var(--ok);   color: #fff; box-shadow: 0 2px 10px rgba(30,138,76,0.45); transform: scale(1.08); }
+  .cb-warn.act { background: var(--warn); color: #fff; box-shadow: 0 2px 8px rgba(192,57,43,0.45); transform: scale(1.08); }
+  .cb-enc.act  { background: var(--enc);  color: #fff; box-shadow: 0 2px 10px rgba(46,109,180,0.45); transform: scale(1.08); }
+
+  /* ROUND INCOMPLETE */
+  .cb-inc {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 2.5px solid var(--inc); background: rgba(122,148,176,0.08);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.18s; flex-shrink: 0;
+  }
+  .cb-inc.act { border-color: #7A94B0; background: rgba(122,148,176,0.3); box-shadow: 0 2px 8px rgba(122,148,176,0.4); transform: scale(1.08); }
+  .cb-dot { width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background 0.18s; }
+  .cb-inc.act .cb-dot { background: #4A6080; }
+
+  /* CHECK ITEM (Phase 1) */
+  .ci {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 12px; border-radius: 8px;
+    background: #F4F8FF; border: 1px solid rgba(46,109,180,0.12);
+    transition: background 0.2s, border-color 0.2s; margin-bottom: 6px;
+  }
+  .ci:hover { background: rgba(46,109,180,0.07); border-color: rgba(46,109,180,0.25); }
+  .ci-text { flex: 1; font-size: 13px; line-height: 1.6; color: #1A2A3A; padding-top: 2px; }
+
+  /* TAGS */
+  .tag { display: inline-block; font-size: 9px; padding: 2px 8px; border-radius: 12px; font-weight: 600; margin-left: 6px; vertical-align: middle; }
+  .t-asap     { background: rgba(46,109,180,0.2); color: var(--blue-light); }
+  .t-nok      { background: rgba(192,57,43,0.15); color: #E88080; }
+  .t-opt      { background: rgba(143,164,192,0.12); color: var(--grey-mid); }
+
+  /* SUB ITEMS */
+  .subs { margin-top: 10px; margin-left: 2px; display: flex; flex-direction: column; gap: 5px; border-left: 2px solid rgba(74,144,217,0.22); padding-left: 10px; }
+  .si {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 6px;
+    background: #F0F5FF; font-size: 12px;
+    color: #2C3E55; border: 1px solid rgba(46,109,180,0.10);
+    transition: background 0.15s;
+  }
+  .si:hover { background: rgba(46,109,180,0.08); }
+  .si .cbg { flex-direction: row; }
+  .si .cb  { width: 26px; height: 22px; font-size: 8px; }
+  .si .cb-inc { width: 18px; height: 18px; }
+  .si .cb-dot { width: 6px; height: 6px; }
+  .si-label { flex: 1; }
+
+  /* TABLE */
+  .dtbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .dtbl th {
+    background: #1E4080; color: #B8CCE8;
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(46,109,180,0.3);
+    white-space: nowrap;
+  }
+  .dtbl td { padding: 12px 12px; border-bottom: 1px solid rgba(46,109,180,0.08); vertical-align: top; color: #1A2A3A; line-height: 1.5; }
+  .dtbl tr:last-child td { border-bottom: none; }
+  .dtbl tr:hover td { background: rgba(46,109,180,0.04); }
+  .chip { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 12px; background: rgba(46,109,180,0.10); color: #1A5CA8; font-weight: 500; border: 1px solid rgba(46,109,180,0.2); white-space: nowrap; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: #E0EAF8; color: #2C3E55; border: 1px solid rgba(46,109,180,0.2); white-space: nowrap; }
+
+  /* TABLE CBG */
+  .tcbg { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+
+  .note { font-size: 11px; color: #4A6080; font-style: italic; margin-top: -8px; }
+
+  @media (max-width: 620px) {
+    .ph-body { padding: 14px 12px; }
+    .ph-head { padding: 12px 14px; }
+    .dtbl { font-size: 11px; }
+    .dtbl td, .dtbl th { padding: 8px 8px; }
+    th:nth-child(4), td:nth-child(4) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbadge">UNISERV BTP &mdash; Département Communication</div>
+  <h1>Plan de Développement<br><span>de l'Identité Visuelle</span></h1>
+  <p>Suivi des livrables &amp; avancement par phases</p>
+  <div class="hdiv"></div>
+</header>
+
+<!-- LEGEND -->
+<div class="legend-box">
+  <div class="legend-title">Légende — Statut des livrables</div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="leg leg-ok">OK</div><span><strong>Validé</strong> — Livrable complété et approuvé</span></div>
+    <div class="legend-item"><div class="leg leg-warn">!</div><span><strong>Attention</strong> — Bloqué, en attente ou problème identifié</span></div>
+    <div class="legend-item"><div class="leg leg-enc">EN C.</div><span><strong>En cours</strong> — Travail actuellement en progression</span></div>
+    <div class="legend-item"><div class="leg-inc"></div><span><strong>Incomplet</strong> — Certains éléments restent à réaliser</span></div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-label">
+    <span>Progression globale (éléments principaux validés OK)</span>
+    <span class="prog-count" id="progressText">0 / 0</span>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="wrapper">
+
+<!-- ═══ PHASE 1 ═══ -->
+<div class="phase">
+  <div class="ph-head">
+    <div class="ph-num">1</div>
+    <div>
+      <div class="ph-title">Fondamentaux de l'Identité Visuelle</div>
+      <div class="ph-sub">Priorité haute — Dès que possible</div>
+    </div>
+  </div>
+  <div class="ph-body">
+
+    <div>
+      <div class="sec-label">1 — Charte graphique concise</div>
+
+      <!-- Logo -->
+      <div class="ci">
+        <div class="cbg">
+          <div class="cb cb-ok"   onclick="tog(this)">OK</div>
+          <div class="cb cb-warn" onclick="tog(this)">!</div>
+          <div class="cb cb-enc"  onclick="tog(this)">EN C.</div>
+          <div class="cb-inc"     onclick="togInc(this)"><div class="cb-dot"></div></div>
+        </div>
+        <div class="ci-text">
+          Logo principal — horizontal &amp; icône <span class="tag t-asap">Dès que possible</span>
+          <div class="subs">
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Version horizontale (principale)</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Version icône / symbole seul</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Logo animé UNISERV BTP <span class="tag t-asap">Prioritaire LinkedIn</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Couleurs -->
+      <div class="ci">
+        <div class="cbg">
+          <div class="cb cb-ok"   onclick="tog(this)">OK</div>
+          <div class="cb cb-warn" onclick="tog(this)">!</div>
+          <div class="cb cb-enc"  onclick="tog(this)">EN C.</div>
+          <div class="cb-inc"     onclick="togInc(this)"><div class="cb-dot"></div></div>
+        </div>
+        <div class="ci-text">
+          Couleurs principales &amp; secondaires
+          <div class="subs">
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Codes Pantone</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Codes RVB</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Codes CMJN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typo -->
+      <div class="ci">
+        <div class="cbg">
+          <div class="cb cb-ok"   onclick="tog(this)">OK</div>
+          <div class="cb cb-warn" onclick="tog(this)">!</div>
+          <div class="cb cb-enc"  onclick="tog(this)">EN C.</div>
+          <div class="cb-inc"     onclick="togInc(this)"><div class="cb-dot"></div></div>
+        </div>
+        <div class="ci-text">
+          Typographie — polices titres, sous-titres et corps de texte
+          <div class="subs">
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Police titres</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Police sous-titres</span>
+            </div>
+            <div class="si">
+              <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+              <span class="si-label">Police corps de texte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Règle -->
+      <div class="ci">
+        <div class="cbg">
+          <div class="cb cb-ok"   onclick="tog(this)">OK</div>
+          <div class="cb cb-warn" onclick="tog(this)">!</div>
+          <div class="cb cb-enc"  onclick="tog(this)">EN C.</div>
+          <div class="cb-inc"     onclick="togInc(this)"><div class="cb-dot"></div></div>
+        </div>
+        <div class="ci-text">Règle d'utilisation du logo</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec-label">2 — Kit de logos vectoriels (tous formats)</div>
+      <div class="ci">
+        <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+        <div class="ci-text">Fichier .ai (Adobe Illustrator)</div>
+      </div>
+      <div class="ci">
+        <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+        <div class="ci-text">PNG fond transparent — HD</div>
+      </div>
+      <div class="ci">
+        <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+        <div class="ci-text">Fichier .jpg / JPEG</div>
+      </div>
+      <div class="ci">
+        <div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div>
+        <div class="ci-text">Autres formats complémentaires</div>
+      </div>
+    </div>
+
+    <p class="note">Pour créer du contenu rapidement et de manière uniforme.</p>
+  </div>
+</div>
+
+<!-- ═══ PHASE 2 ═══ -->
+<div class="phase">
+  <div class="ph-head">
+    <div class="ph-num">2</div>
+    <div>
+      <div class="ph-title">Les Templates Digitaux</div>
+      <div class="ph-sub">Prioritaires pour LinkedIn &amp; communication courante</div>
+    </div>
+  </div>
+  <div class="ph-body">
+    <table class="dtbl">
+      <thead>
+        <tr>
+          <th style="width:46px">Statut</th>
+          <th>Catégorie</th>
+          <th>Projet / Type de visuel</th>
+          <th>Objectif principal</th>
+          <th>Caractéristiques</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- LinkedIn -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">LinkedIn &amp; diffusion interne</span></td>
+          <td>
+            <strong>5 à 7 templates</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Annonce projet / chantier</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Portrait collaborateur</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Témoignage (photo + citation)</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Focus Innovation / QHSE</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Le saviez-vous (pédagogique)</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Bannière d'événement / salon</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Carrousel éducatif / Newsletter trimestrielle</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">—</td>
+          <td style="font-size:11px">Annonce chantier, portrait, témoignage, focus QHSE, le saviez-vous, bannière événement, carrousel éducatif / newsletter</td>
+          <td><div class="badge">Lot 1 : 31 jan</div><br><div class="badge" style="margin-top:4px">Lot 2 : 15 fév</div></td>
+        </tr>
+
+        <!-- PowerPoint -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Présentation commerciale</span></td>
+          <td>
+            <strong>Template PowerPoint</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Diapos couverture &amp; sommaire</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Titres, citations, colonnes</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Équipes, chronologie, chiffres clés</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Portfolio projets &amp; remerciements</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">L'utilisateur peut recomposer n'importe quelle présentation lui-même.</td>
+          <td style="font-size:11px">Couverture, sommaire, titres, citations, colonnes, équipes, chronologie, chiffres clés, portfolio, remerciements.</td>
+          <td><div class="badge">Dès que possible</div></td>
+        </tr>
+
+        <!-- Brochure -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Institutionnel</span></td>
+          <td>
+            <strong>Brochure institutionnelle</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Version imprimable (A4 paysage)</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Version électronique (PDF interactif)</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">Présenter l'entreprise, ses activités, son savoir-faire, ses valeurs et réalisations. Support de référence interne et externe.</td>
+          <td style="font-size:11px">Format paysage ou A4. 27 à 36 pages. Version imprimable + version électronique.</td>
+          <td><div class="badge">28 février</div></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ PHASE 3 ═══ -->
+<div class="phase">
+  <div class="ph-head">
+    <div class="ph-num">3</div>
+    <div>
+      <div class="ph-title">Autres Livrables</div>
+      <div class="ph-sub">E-mailing · Identité visuelle · Campagne · Événementiel</div>
+    </div>
+  </div>
+  <div class="ph-body">
+    <table class="dtbl">
+      <thead>
+        <tr>
+          <th style="width:46px">Statut</th>
+          <th>Catégorie</th>
+          <th>Projet / Type de visuel</th>
+          <th>Objectif</th>
+          <th>Caractéristiques</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- E-mailing -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">E-mailing</span></td>
+          <td>
+            <strong>1 template HTML newsletter</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Compatible Outlook</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Compatible Gmail &amp; autres</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Version responsive mobile</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">—</td>
+          <td style="font-size:11px">Template HTML responsive pour newsletter interne (annonce, Outlook, Gmail, etc.)</td>
+          <td><div class="badge">Avril 2026</div></td>
+        </tr>
+
+        <!-- ID Visuelle Phase A -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Identité visuelle</span></td>
+          <td>
+            <strong>Identité visuelle — Phase A</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">En-tête (papier &amp; numérique)</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Signatures mails</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Branding véhicules <span class="tag t-nok">Non réalisé</span></span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Carte de visite</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Notes de service</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">Harmoniser les différents éléments de notre identité visuelle</td>
+          <td style="font-size:11px">Permettre l'intégration facile par les services ou l'utilisateur. PPWT éditable directement.</td>
+          <td><div class="badge">04/02/2026</div></td>
+        </tr>
+
+        <!-- Campagne A -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Campagne</span></td>
+          <td>
+            <strong>Campagne A — Cover LinkedIn 2026</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Cover 1 image — Semestre 1</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Cover 1 image — Semestre 2</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">Générer des précommandes</td>
+          <td style="font-size:11px">Prévoir 2 covers sur l'année 2026. Le basic mais à définir.</td>
+          <td><div class="badge">Mars 2026</div></td>
+        </tr>
+
+        <!-- ID Visuelle Phase B -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Identité visuelle</span></td>
+          <td>
+            <strong>Identité visuelle — Phase B</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Template PowerPoint (phase B)</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Kakemono</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Supports lancement / affichage / inauguration</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">—</td>
+          <td style="font-size:11px">—</td>
+          <td><div class="badge">A la demande</div></td>
+        </tr>
+
+        <!-- Stand -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Evenementiel</span></td>
+          <td>
+            <strong>Design d'un stand d'exposition</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Version 9m2</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Version 12m2</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">—</td>
+          <td style="font-size:11px">9m2 ou 12m2</td>
+          <td><div class="badge">A la demande</div></td>
+        </tr>
+
+        <!-- Voeux -->
+        <tr>
+          <td><div class="tcbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div></td>
+          <td><span class="chip">Evenementiel</span></td>
+          <td>
+            <strong>Campagne Voeux de Fin d'Annee</strong>
+            <div class="subs" style="margin-top:8px">
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">E-card animee</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Publication LinkedIn</span></div>
+              <div class="si"><div class="cbg"><div class="cb cb-ok" onclick="tog(this)">OK</div><div class="cb cb-warn" onclick="tog(this)">!</div><div class="cb cb-enc" onclick="tog(this)">EN C.</div><div class="cb-inc" onclick="togInc(this)"><div class="cb-dot"></div></div></div><span class="si-label">Calendrier interne entreprise</span></div>
+            </div>
+          </td>
+          <td style="font-size:11px">Fidélisation et remerciements</td>
+          <td style="font-size:11px">E-card animée + publication LinkedIn et calendrier</td>
+          <td><div class="badge">Juin 2026</div><br><div class="badge" style="margin-top:4px">Oct. 2026</div></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /wrapper -->
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" style="display:none;position:fixed;inset:0;background:rgba(13,27,42,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:#162338;border:1px solid rgba(78,144,217,0.3);border-radius:14px;padding:40px 36px;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+    <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:8px;">UNISERV BTP</div>
+    <div style="font-size:12px;color:#8FA4C0;margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;">Accès sécurisé</div>
+    <input id="pwdInput" type="password" placeholder="Mot de passe" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(78,144,217,0.3);background:rgba(255,255,255,0.05);color:#fff;font-size:14px;margin-bottom:12px;outline:none;" onkeydown="if(event.key==='Enter')checkPwd()">
+    <div id="pwdError" style="color:#E88080;font-size:12px;margin-bottom:12px;display:none;">Mot de passe incorrect</div>
+    <button onclick="checkPwd()" style="width:100%;padding:12px;background:#2E6DB4;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">Accéder</button>
+    <div style="font-size:11px;color:#3A4E66;margin-top:20px;">Réservé à l'équipe UNISERV BTP</div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMe6BaNz82Yf3RHc9lyK0jHTUiWB4c8k8",
+    authDomain: "uniserv-btp.firebaseapp.com",
+    projectId: "uniserv-btp",
+    storageBucket: "uniserv-btp.firebasestorage.app",
+    messagingSenderId: "358817778569",
+    appId: "1:358817778569:web:898a14a8450c42c3372f58",
+    measurementId: "G-4WL7TT40FE"
+  };
+
+  const PASSWORD = "uniserv2026";
+  const SESSION_KEY = "uniserv_auth";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let isAuthorized = false;
+  let isSaving = false;
+
+  // --- AUTH ---
+  function checkPwd() {
+    const val = document.getElementById('pwdInput').value;
+    if (val === PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('loginOverlay').style.display = 'none';
+      isAuthorized = true;
+      startSync();
+    } else {
+      document.getElementById('pwdError').style.display = 'block';
+    }
+  }
+  window.checkPwd = checkPwd;
+
+  // --- INIT ---
+  window.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+      document.getElementById('loginOverlay').style.display = 'none';
+      isAuthorized = true;
+      startSync();
+    } else {
+      document.getElementById('loginOverlay').style.display = 'flex';
+    }
+  });
+
+  // --- SYNC FIREBASE ---
+  function startSync() {
+    const ref = doc(db, 'statuts', 'main');
+    onSnapshot(ref, (snap) => {
+      if (snap.exists() && !isSaving) {
+        const data = snap.data();
+        getAllButtons().forEach((btn, i) => {
+          btn.classList.toggle('act', !!data['btn_' + i]);
+        });
+        updateProgress();
+      }
+    });
+  }
+
+  async function saveState() {
+    if (!isAuthorized) return;
+    isSaving = true;
+    const state = {};
+    getAllButtons().forEach((btn, i) => {
+      state['btn_' + i] = btn.classList.contains('act');
+    });
+    try {
+      await setDoc(doc(db, 'statuts', 'main'), state);
+    } catch(e) { console.error(e); }
+    setTimeout(() => { isSaving = false; }, 500);
+  }
+
+  function getAllButtons() {
+    return document.querySelectorAll('.cb, .cb-inc');
+  }
+
+  function getGroup(el) {
+    return el.closest('.cbg') || el.closest('.tcbg');
+  }
+
+  function tog(btn) {
+    const g = getGroup(btn);
+    if (!g) return;
+    const wasAct = btn.classList.contains('act');
+    g.querySelectorAll('.cb').forEach(b => b.classList.remove('act'));
+    g.querySelectorAll('.cb-inc').forEach(b => b.classList.remove('act'));
+    if (!wasAct) btn.classList.add('act');
+    updateProgress();
+    saveState();
+  }
+
+  function togInc(btn) {
+    const g = getGroup(btn);
+    if (!g) return;
+    const wasAct = btn.classList.contains('act');
+    g.querySelectorAll('.cb').forEach(b => b.classList.remove('act'));
+    g.querySelectorAll('.cb-inc').forEach(b => b.classList.remove('act'));
+    if (!wasAct) btn.classList.add('act');
+    updateProgress();
+    saveState();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.phase .cb.cb-ok:not(.si .cb-ok)');
+    const total = all.length;
+    let ok = 0;
+    all.forEach(b => { if (b.classList.contains('act')) ok++; });
+    document.getElementById('progressText').textContent = ok + ' / ' + total;
+    document.getElementById('progressFill').style.width = (total ? Math.round(ok/total*100) : 0) + '%';
+  }
+
+  window.tog = tog;
+  window.togInc = togInc;
+  updateProgress();
+</script>
+
+</body>
+</html>
