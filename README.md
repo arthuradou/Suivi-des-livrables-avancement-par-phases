@@ -8,7 +8,7 @@ Le projet présente les différentes phases, les livrables associés et leur sta
 
 ## Fonctionnalités
 
-* Suivi des tâches par statut : Validé, En cours, Attention, Incomplet
+* Suivi des tâches par statut : Validé, En cours, Incomplet
 * Organisation en phases (fondamentaux, templates, autres livrables)
 * Barre de progression automatique
 * Interface responsive (mobile et desktop)
